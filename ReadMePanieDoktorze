@@ -1,0 +1,16 @@
+# ProjektPython
+Proca zaliczeniowa na postawy programowania w języku Python. Wybrałam zadanie 4, tj. 
+
+"4. Gra RPG
+
+Minimalne wymagania (na ocenę maksymalnie 3.5): 
+
+Utwórz model gry RPG, w której na podstawie klasy bazowej Bohater utworzone zostaną 4 klasy potomne (np. Barbarzynca, Czarodziejka, Zlodziej, Rycerz). Klasa bazowa powinna posiadać takie atrybuty jak: sila, inteligencja, zwinnosc, punty_zycia, punkty_ataku oraz metody: przedstaw_sie(), atakuj(), uciekaj(), rozmawiaj(). Zaproponuj po dwa atrybuty i dwie metody właściwe dla danych klas postaci. Wykorzystaj znane Ci mechanizmy programowania obiektowego (enkapsulacja, polimorfizm, dziedziczenie). Następnie spróbuj zaprojektować grę z interfejsem konsolowym CLI wykorzystującą zbudowaną klasę. Gra powinna posiadać system obsługi użytkowników (nazwa i hasło).
+
+Dodatkowe funkcjonalności programu oraz zaawansowane mechanizmy (funkcje, klasy), sporządzenie opisu/dokumentacji zwiększają ocenę za realizację projektu."
+
+Wszystkie wymagane rzeczy zawarłam w kodzie, dodatkowo zamiast 4 klas potomnych, utworzyłam ich 6 (dodatkowo Elf i Kapłan). Co więcej, stworzyłam także prosty system rankingowy. Dodałam funkcję "zwieksz_poziom" do klasy "Uzytkownik" oraz aktualizowałam funkcję "stworz_nowa_postac", aby zwiększała poziom gracza przy tworzeniu nowej postaci. Dodatkowo, w menu gry dodałam opcję "Przejrzyj ranking", która wyświetla ranking graczy na podstawie ich poziomów. Dodałam także klasę "Fabula", która jest odpowiedzialna za zarządzanie elementami fabularnymi gry. Jednak sama klasa "Fabula" nie zawiera konkretnych elementów fabularnych ani historii. Zamiast tego, w klasie "Fabula" istnieją metody takie jak "rozpocznij_misje_glowna()", "zakoncz_misje_glowna()", "dodaj_quest_poboczny()", które są ogólnymi funkcjami związanymi z fabułą.
+
+Może kiedyś coś fajnego z tego powstanie :) 
+
+
