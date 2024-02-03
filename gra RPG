@@ -1,0 +1,255 @@
+class Bohater:
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku):
+        self.imie = imie
+        self.sila = sila
+        self.inteligencja = inteligencja
+        self.zwinność = zwinność
+        self.punkty_życia = punkty_życia
+        self.punkty_ataku = punkty_ataku
+
+    def przedstaw_sie(self):
+        print(f"Jestem bohaterem o imieniu {self.imie}.")
+
+    def atakuj(self, przeciwnik):
+        print(f"{self.imie} atakuje {przeciwnik.imie} z siłą {self.punkty_ataku}.")
+
+    def uciekaj(self):
+        print(f"{self.imie} ucieka przed niebezpieczeństwem!")
+
+    def rozmawiaj(self, postac):
+        print(f"{self.imie} rozmawia z {postac.imie}.")
+
+
+class Czarodziejka(Bohater):
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku, zaklecia):
+        super().__init__(imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku)
+        self.zaklecia = zaklecia
+
+    def rzuc_zaklecie(self, przeciwnik):
+        print(f"{self.imie} rzuca zaklęcie {self.zaklecia} na {przeciwnik.imie}.")
+
+    def lecz(self):
+        print(f"{self.imie} używa magicznej mocy do leczenia.")
+
+
+class Zlodziej(Bohater):
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku, umiejetnosc_skradania):
+        super().__init__(imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku)
+        self.umiejetnosc_skradania = umiejetnosc_skradania
+
+    def skradnij(self, przedmiot):
+        print(f"{self.imie} używa umiejętności {self.umiejetnosc_skradania} do ukradnięcia {przedmiot}.")
+
+    def unikaj(self):
+        print(f"{self.imie} zwinął się, unikając ataku.")
+
+
+class Rycerz(Bohater):
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku, bron):
+        super().__init__(imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku)
+        self.bron = bron
+
+    def atak_mieczem(self, przeciwnik):
+        print(f"{self.imie} atakuje {przeciwnik.imie} za pomocą {self.bron}.")
+
+    def obrona(self):
+        print(f"{self.imie} przyjmuje postawę obronną, zwiększając swoją wytrzymałość.")
+
+
+class Elf(Bohater):
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku, umiejetnosc_strzelania):
+        super().__init__(imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku)
+        self.umiejetnosc_strzelania = umiejetnosc_strzelania
+
+    def strzel(self, przeciwnik):
+        print(f"{self.imie} strzela do {przeciwnik.imie} z umiejętnością {self.umiejetnosc_strzelania}.")
+
+    def skradanie(self):
+        print(f"{self.imie} potrafi skradać się, wykorzystując zwinność.")
+
+
+class Kaplan(Bohater):
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku, modlitwy):
+        super().__init__(imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku)
+        self.modlitwy = modlitwy
+
+    def uzdrawiaj(self, sojusznik):
+        print(f"{self.imie} używa modlitw, aby uzdrowić {sojusznik.imie}.")
+
+    def atak_mieczem(self, przeciwnik):
+        print(f"{self.imie} atakuje {przeciwnik.imie} za pomocą miecza.")
+
+
+class Barbarzynca(Bohater):
+    def __init__(self, imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku, dzikie_atak):
+        super().__init__(imie, sila, inteligencja, zwinność, punkty_życia, punkty_ataku)
+        self.dzikie_atak = dzikie_atak
+
+    def dziki_atak(self, przeciwnik):
+        print(f"{self.imie} używa dzikiego ataku {self.dzikie_atak} na {przeciwnik.imie}.")
+
+
+class Uzytkownik:
+    def __init__(self, nazwa, haslo):
+        self.nazwa = nazwa
+        self.haslo = haslo
+        self.postacie = []
+
+    def dodaj_postac(self, postac):
+        self.postacie.append(postac)
+
+    def __str__(self):
+        return f"Użytkownik: {self.nazwa}"
+
+
+class GraRPG:
+    def __init__(self):
+        self.uzytkownicy = []
+
+    def zarejestruj_uzytkownika(self, nazwa, haslo):
+        nowy_uzytkownik = Uzytkownik(nazwa, haslo)
+        self.uzytkownicy.append(nowy_uzytkownik)
+        print(f"Użytkownik {nazwa} został zarejestrowany.")
+
+    def logowanie(self, nazwa, haslo):
+        for uzytkownik in self.uzytkownicy:
+            if uzytkownik.nazwa == nazwa and uzytkownik.haslo == haslo:
+                return uzytkownik
+        return None
+
+    def menu_glowne(self):
+        print("\n=== Menu Główne ===")
+        print("1. Zarejestruj nowego użytkownika")
+        print("2. Zaloguj się")
+        print("3. Wyjdź z gry")
+
+    def uruchom(self):
+        while True:
+            self.menu_glowne()
+            wybor_glowny = input("Wybierz opcję: ")
+
+            if wybor_glowny == '1':
+                nazwa = input("Podaj nazwę użytkownika: ")
+                haslo = input("Podaj hasło: ")
+                self.zarejestruj_uzytkownika(nazwa, haslo)
+            elif wybor_glowny == '2':
+                nazwa = input("Podaj nazwę użytkownika: ")
+                haslo = input("Podaj hasło: ")
+                uzytkownik = self.logowanie(nazwa, haslo)
+                if uzytkownik:
+                    self.menu_gry(uzytkownik)
+                else:
+                    print("Nieprawidłowe dane logowania. Spróbuj ponownie.")
+            elif wybor_glowny == '3':
+                print("Do widzenia!")
+                break
+            else:
+                print("Nieprawidłowy wybór. Spróbuj ponownie.")
+
+    def menu_gry(self, uzytkownik):
+        print(f"Witaj, {uzytkownik.nazwa}!")
+        while True:
+            print("\n=== Menu Główne Gry ===")
+            print("1. Stwórz nową postać")
+            print("2. Wybierz postać")
+            print("3. Wyloguj się")
+
+            wybor_gry = input("Wybierz opcję: ")
+
+            if wybor_gry == '1':
+                self.stworz_nowa_postac(uzytkownik)
+            elif wybor_gry == '2':
+                if not uzytkownik.postacie:
+                    print("Brak dostępnych postaci. Stwórz nową postać.")
+                else:
+                    self.wybierz_postac(uzytkownik)
+            elif wybor_gry == '3':
+                print(f"Do widzenia, {uzytkownik.nazwa}!")
+                break
+            else:
+                print("Nieprawidłowy wybór. Spróbuj ponownie.")
+
+    def stworz_nowa_postac(self, uzytkownik):
+        imie = input("Podaj imię postaci: ")
+        print("Dostępne klasy: 1. Czarodziejka, 2. Złodziej, 3. Rycerz, 4. Elf, 5. Kaplan, 6. Barbarzynca")
+        klasa = input("Wybierz klasę postaci: ")
+
+        if klasa == '1':
+            postac = Czarodziejka(imie, 10, 15, 20, 100, 25, "Ogniste kule")
+        elif klasa == '2':
+            postac = Zlodziej(imie, 8, 12, 20, 80, 15, "Niewidzialność")
+        elif klasa == '3':
+            postac = Rycerz(imie, 15, 10, 12, 120, 30, "Miecz")
+        elif klasa == '4':
+            postac = Elf(imie, 12, 15, 18, 90, 25, "Łukiem")
+        elif klasa == '5':
+            postac = Kaplan(imie, 8, 20, 12, 80, 15, "Święte modlitwy")
+        elif klasa == '6':
+            postac = Barbarzynca(imie, 18, 8, 14, 150, 35, "Taranowanie")
+        else:
+            print("Nieprawidłowy wybór klasy. Postać nie została stworzona.")
+            return
+
+        uzytkownik.dodaj_postac(postac)
+        print(f"{postac.imie} został(a) dodany(a) do gry!")
+
+    def wybierz_postac(self, uzytkownik):
+        while True:
+            print("\n=== Menu Postaci ===")
+            for i, postac in enumerate(uzytkownik.postacie, start=1):
+                print(f"{i}. {postac.imie}")
+
+            numer_postaci = input("Wybierz numer postaci: ")
+
+            try:
+                numer_postaci = int(numer_postaci)
+                if 1 <= numer_postaci <= len(uzytkownik.postacie):
+                    postac = uzytkownik.postacie[numer_postaci - 1]
+                    self.menu_akcji_postaci(postac)
+                else:
+                    print("Nieprawidłowy numer postaci. Spróbuj ponownie.")
+            except ValueError:
+                print("Nieprawidłowy numer postaci. Spróbuj ponownie.")
+
+    def menu_akcji_postaci(self, postac):
+        while True:
+            print(f"\n=== Menu Akcji dla {postac.imie} ===")
+            print("1. Atakuj przeciwnika")
+            print("2. Uciekaj")
+            print("3. Wróć do Menu Głównego Gry")
+
+            wybor_akcji = input("Wybierz akcję: ")
+
+            if wybor_akcji == '1':
+                self.atakuj_przeciwnika(postac)
+            elif wybor_akcji == '2':
+                postac.uciekaj()
+            elif wybor_akcji == '3':
+                break
+            else:
+                print("Nieprawidłowy wybór. Spróbuj ponownie.")
+
+    def atakuj_przeciwnika(self, postac):
+        while True:
+            print("\n=== Menu Ataku ===")
+            for i, przeciwnik in enumerate(self.uzytkownicy, start=1):
+                if przeciwnik != postac:
+                    print(f"{i}. {przeciwnik.nazwa}")
+
+            numer_przeciwnika = input("Wybierz numer przeciwnika: ")
+
+            try:
+                numer_przeciwnika = int(numer_przeciwnika)
+                if 1 <= numer_przeciwnika <= len(self.uzytkownicy) and self.uzytkownicy[numer_przeciwnika - 1] != postac:
+                    przeciwnik = self.uzytkownicy[numer_przeciwnika - 1].postacie[0]
+                    postac.atakuj(przeciwnik)
+                    break
+                else:
+                    print("Nieprawidłowy numer przeciwnika. Spróbuj ponownie.")
+            except ValueError:
+                print("Nieprawidłowy numer przeciwnika. Spróbuj ponownie.")
+
+
+# Uruchomienie gry
+gra = GraRPG()
+gra.uruchom()
