@@ -89,22 +89,52 @@ class Barbarzynca(Bohater):
         print(f"{self.imie} używa dzikiego ataku {self.dzikie_atak} na {przeciwnik.imie}.")
 
 
+class Fabula:
+    def __init__(self):
+        self.aktualna_misja = None
+        self.questy_poboczne = []
+
+    def rozpocznij_misje_glowna(self):
+        self.aktualna_misja = "Ocalić Królestwo przed ciemnym lordem!"
+
+    def zakoncz_misje_glowna(self):
+        print("Misja główna zakończona! Królestwo jest bezpieczne.")
+
+    def dodaj_quest_poboczny(self, nazwa_questa):
+        self.questy_poboczne.append(nazwa_questa)
+
+    def zakoncz_quest_poboczny(self, nazwa_questa):
+        print(f"Quest poboczny '{nazwa_questa}' zakończony! Otrzymujesz nagrodę.")
+
+    def przedstaw_fabule(self):
+        print("\n=== Fabuła ===")
+        print(f"Aktualna misja: {self.aktualna_misja}")
+        print("Questy poboczne:")
+        for quest in self.questy_poboczne:
+            print(f"- {quest}")
+
+
 class Uzytkownik:
     def __init__(self, nazwa, haslo):
         self.nazwa = nazwa
         self.haslo = haslo
         self.postacie = []
+        self.poziom = 1
 
     def dodaj_postac(self, postac):
         self.postacie.append(postac)
 
+    def zwieksz_poziom(self):
+        self.poziom += 1
+
     def __str__(self):
-        return f"Użytkownik: {self.nazwa}"
+        return f"Użytkownik: {self.nazwa} (Poziom: {self.poziom})"
 
 
 class GraRPG:
     def __init__(self):
         self.uzytkownicy = []
+        self.fabula = Fabula()
 
     def zarejestruj_uzytkownika(self, nazwa, haslo):
         nowy_uzytkownik = Uzytkownik(nazwa, haslo)
@@ -121,7 +151,8 @@ class GraRPG:
         print("\n=== Menu Główne ===")
         print("1. Zarejestruj nowego użytkownika")
         print("2. Zaloguj się")
-        print("3. Wyjdź z gry")
+        print("3. Wyświetl ranking")
+        print("4. Wyjdź z gry")
 
     def uruchom(self):
         while True:
@@ -141,6 +172,8 @@ class GraRPG:
                 else:
                     print("Nieprawidłowe dane logowania. Spróbuj ponownie.")
             elif wybor_glowny == '3':
+                self.wyswietl_ranking()
+            elif wybor_glowny == '4':
                 print("Do widzenia!")
                 break
             else:
@@ -149,10 +182,13 @@ class GraRPG:
     def menu_gry(self, uzytkownik):
         print(f"Witaj, {uzytkownik.nazwa}!")
         while True:
+            self.fabula.przedstaw_fabule()
             print("\n=== Menu Główne Gry ===")
             print("1. Stwórz nową postać")
             print("2. Wybierz postać")
             print("3. Wyloguj się")
+            print("4. Przejrzyj misje")
+            print("5. Przejrzyj ranking")
 
             wybor_gry = input("Wybierz opcję: ")
 
@@ -166,6 +202,10 @@ class GraRPG:
             elif wybor_gry == '3':
                 print(f"Do widzenia, {uzytkownik.nazwa}!")
                 break
+            elif wybor_gry == '4':
+                self.przejrzyj_misje(uzytkownik)
+            elif wybor_gry == '5':
+                self.wyswietl_ranking()
             else:
                 print("Nieprawidłowy wybór. Spróbuj ponownie.")
 
@@ -192,6 +232,14 @@ class GraRPG:
 
         uzytkownik.dodaj_postac(postac)
         print(f"{postac.imie} został(a) dodany(a) do gry!")
+        uzytkownik.zwieksz_poziom()
+
+    def wyswietl_ranking(self):
+        print("\n=== Ranking ===")
+        ranking = sorted(self.uzytkownicy, key=lambda x: x.poziom, reverse=True)
+        for miejsce, gracz in enumerate(ranking, start=1):
+            print(f"{miejsce}. {gracz}")
+
 
     def wybierz_postac(self, uzytkownik):
         while True:
@@ -248,6 +296,9 @@ class GraRPG:
                     print("Nieprawidłowy numer przeciwnika. Spróbuj ponownie.")
             except ValueError:
                 print("Nieprawidłowy numer przeciwnika. Spróbuj ponownie.")
+
+    def przejrzyj_misje(self, uzytkownik):
+        self.fabula.przedstaw_fabule()
 
 
 # Uruchomienie gry
